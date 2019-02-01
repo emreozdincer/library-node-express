@@ -1,0 +1,51 @@
+{
+  "name": "webstormprojects",
+  "version": "1.0.0",
+  "description": "Pluralsight on Node+Express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set DEBUG=app,app:* & nodemon app.js",
+    "lint": "eslint app.js"
+  },
+  "author": "Emre Özdinçer",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "0.18.0",
+    "body-parser": "1.18.3",
+    "bootstrap": "4.2.1",
+    "chalk": "1.1.3",
+    "cookie-parser": "1.4.3",
+    "debug": "2.6.6",
+    "ejs": "2.5.7",
+    "express": "4.15.2",
+    "express-session": "1.15.6",
+    "jquery": "3.3.1",
+    "mongodb": "3.0.1",
+    "morgan": "1.8.1",
+    "mssql": "4.3.0",
+    "passport": "0.4.0",
+    "passport-local": "1.0.0",
+    "pug": "2.0.0-rc.4",
+    "xml2js": "0.4.19"
+  },
+  "devDependencies": {
+    "eslint": "5.12.1",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.16.0",
+    "nodemon": "1.12.1"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules"
+    ],
+    "delay": "1500",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": 3000,
+      "MONGO_URL": "mongodb://localhost:27017",
+      "DB_NAME": "libraryApp"
+    }
+  }
+}
