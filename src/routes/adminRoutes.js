@@ -61,7 +61,7 @@ const books = [
     read: false
   }];
 
-function router(nav) {
+function router() {
   adminRouter.route('/insert')
     .get((req, res) => {
       const url = process.env.MONGO_URL || 'mongodb://localhost:27017';

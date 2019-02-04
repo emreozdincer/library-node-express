@@ -18,13 +18,14 @@ function bookController(bookService, nav) {
 
         for (let i = 0; i < books.length; i++) {
           const book = books[i];
-          book.details = await bookService.getBookById(book.bookId);
+          // book.details = await bookService.getBookById(book.bookId);
+          book.details = bookService.getBookById(book.bookId);
         }
 
         res.render(
           'bookListView',
           {
-            nav,
+            nav: req.app.locals.nav,
             title: 'Library',
             books,
           },

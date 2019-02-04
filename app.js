@@ -46,14 +46,14 @@ app.set('views', 'src/views');
 // app.set('view engine', 'pug');
 app.set('view engine', 'ejs');
 
-const nav = [
+app.locals.nav = [
   { link: '/books', title: 'Books' },
   // { link: '/authors', title: 'Authors' }, // not implemented
 ];
 
-const bookRouter = require('./src/routes/bookRoutes')(nav);
-const adminRouter = require('./src/routes/adminRoutes')(nav);
-const authRouter = require('./src/routes/authRoutes')(nav);
+const bookRouter = require('./src/routes/bookRoutes')();
+const adminRouter = require('./src/routes/adminRoutes')();
+const authRouter = require('./src/routes/authRoutes')();
 
 app.use('/books', bookRouter);
 app.use('/admin', adminRouter);
@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
     'index',
     {
       title: 'Library',
-      nav,
+      nav: req.app.locals.nav,
     },
   );
 });

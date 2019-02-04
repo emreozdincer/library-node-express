@@ -6,7 +6,7 @@ const passport = require('passport');
 const authRouter = express.Router();
 
 // TODO: Implement log out
-function router(nav) {
+function router() {
   authRouter.route('/signUp')
     .post((req, res) => {
       debug(req.body);
@@ -43,7 +43,7 @@ function router(nav) {
   authRouter.route('/signIn')
     .get((req, res) => {
       res.render('signin', {
-        nav,
+        nav: req.app.locals.nav,
         title: 'Sign in',
       });
     })
