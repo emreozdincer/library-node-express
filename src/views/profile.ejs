@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Welcome to Library</title>
+		<title><%=title%></title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>Library
+        <h1><%=title%>
           <p class="lead"></p>
         </h1>
       </div>
@@ -63,12 +63,7 @@
           <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">
-              Sign Up! Or <a href="/auth/signIn">Sign In</a>
-              <form name ="signUpForm" action="/auth/signUp" method="post">
-                Username: <input name="username" id="username"/><br/>
-                Password: <input name="password" id="password"/><br/>
-                <input type="submit" value="Sign up"/>
-              </form>
+              Username: <%=user.username%>
             </div>
           </div>
           <hr>

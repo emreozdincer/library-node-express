@@ -3,7 +3,7 @@ const chalk = require('chalk'); // Terminal string styling
 const debug = require('debug')('app'); // Debugging utility
 const morgan = require('morgan'); // HTTP request logger middleware for node.js
 const path = require('path'); // Better, foolproof methods for writing url/file paths
-// const sql = require('mssql'); // SQL package
+const sql = require('mssql'); // SQL package
 const bodyParser = require('body-parser'); // Parses body of HTTP requests
 const cookieParser = require('cookie-parser'); // Parses cookies
 const session = require('express-session'); // Sessions
@@ -11,24 +11,9 @@ const session = require('express-session'); // Sessions
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// // Connecting to SQL Server in Azure
-// const config = {
-//   user: 'library',
-//   password: 'emre1234.',
-//   server: 'pslibrary-emre.database.windows.net',
-//   database: 'PSLibrary',
+const configSQL = require('./src/config/sql');
 
-//   options: {
-//     encrypt: true,
-//   },
-// };
-// sql.connect(config).catch(err => debug(err));
-
-// // Middleware: How It Works
-// app.use((req, res, next) => {
-// debug('My Middleware');
-// next();
-// });
+sql.connect(configSQL).catch(err => debug(err));
 
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
@@ -48,6 +33,7 @@ app.set('view engine', 'ejs');
 
 app.locals.nav = [
   { link: '/books', title: 'Books' },
+  { link: '/auth/profile', title: 'Profile' },
   // { link: '/authors', title: 'Authors' }, // not implemented
 ];
 
@@ -59,7 +45,6 @@ app.use('/books', bookRouter);
 app.use('/admin', adminRouter);
 app.use('/auth', authRouter);
 app.get('/', (req, res) => {
-  // res.sendFile(path.join(__dirname, 'views/index.html'));
   res.render(
     'index',
     {

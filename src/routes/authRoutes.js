@@ -1,64 +1,30 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
 const debug = require('debug')('app:authRoutes');
 const passport = require('passport');
+const authController = require('../controllers/sql/authController');
 
 const authRouter = express.Router();
 
 // TODO: Implement log out
 function router() {
+  const { signUp, signIn, profile } = authController();
+
   authRouter.route('/signUp')
-    .post((req, res) => {
-      debug(req.body);
-      // create user & redirect
-      const { username, password } = req.body;
-      const url = 'mongodb://localhost:27017';
-      const dbName = 'libraryApp';
-
-      (async function addUser() {
-        let client;
-        try {
-          client = await MongoClient.connect(url);
-          debug('Connected correctly to server');
-
-          const db = client.db(dbName);
-          const col = db.collection('users');
-          const user = { username, password };
-
-          const results = await col.insertOne(user);
-          req.login(results.ops[0], () => {
-            res.redirect('/auth/profile');
-          });
-        } catch (error) {
-          debug(error);
-        }
-      }());
-    });
-
-  authRouter.route('/profile')
-    .get((req, res) => {
-      res.json(req.user);
-    });
+    .post(signUp);
 
   authRouter.route('/signIn')
-    .get((req, res) => {
-      res.render('signin', {
-        nav: req.app.locals.nav,
-        title: 'Sign in',
-      });
-    })
+    .get(signIn)
     .post(passport.authenticate('local', {
       successRedirect: '/auth/profile',
       failureRedirect: '/',
     }));
+
   authRouter.route('/profile')
     .all((req, res, next) => {
       if (req.user) next();
       else res.redirect('/');
     })
-    .get((req, res) => {
-      res.json(req.user);
-    });
+    .get(profile);
   return authRouter;
 }
 

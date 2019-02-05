@@ -1,5 +1,6 @@
 const passport = require('passport');
-require('./strategies/local.strategy')();
+// require('./strategies/local.strategy.mongo')();
+require('./strategies/local.strategy.sql')();
 
 
 module.exports = function passportConfig(app) {
@@ -15,4 +16,4 @@ module.exports = function passportConfig(app) {
   passport.deserializeUser((user, done) => {
     done(null, user);
   });
-}
+};

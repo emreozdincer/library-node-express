@@ -1,7 +1,7 @@
 const { MongoClient, ObjectID } = require('mongodb');
-const debug = require('debug')('app:bookController');
+const debug = require('debug')('app:mongo:bookController');
 
-function bookController(bookService, nav) {
+function bookController(bookService) {
   function getIndex(req, res) {
     const url = process.env.MONGO_URL || 'mongodb://localhost:27017';
     const dbName = process.env.DB_NAME || 'libraryApp';
@@ -51,13 +51,13 @@ function bookController(bookService, nav) {
         const col = await db.collection('books');
         const book = await col.findOne({ _id: new ObjectID(id) });
         debug(book);
-        
+
         book.details = await bookService.getBookById(book.bookId);
-        
+
         res.render(
           'bookView',
           {
-            nav,
+            nav: req.app.locals.nav,
             title: 'Library',
             book,
           },
@@ -68,7 +68,7 @@ function bookController(bookService, nav) {
     }());
   }
   function middleware(req, res, next) {
-    // if (req.user) 
+    // if (req.user)
     next();
     // else res.redirect('/');
   }

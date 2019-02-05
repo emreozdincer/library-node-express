@@ -18,13 +18,13 @@ function localStrategy() {
         client = await MongoClient.connect(url);
 
         debug('Connected correctly to server');
-        
+
         const db = client.db(dbName);
         const col = db.collection('users');
 
         const user = await col.findOne({ username });
 
-        if (user.password === password) {
+        if (user && user.password === password) {
           done(null, user);
         } else {
           done(null, false);
