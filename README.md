@@ -5,7 +5,7 @@
 * Express
 * ejs & bootstrap
 * MongoDB
-* SQL Server on Azure (In work)
+* SQL Server on Azure
 
 # Features
 * Routing, Middlewares, Debugging
@@ -13,7 +13,7 @@
 * Structured (folder-by-type): config, controllers, routes, services, views
 * Uses Goodreads API to fetch information via Axios
 
-# Usage (in work)
+# Usage
 
 `npm install`
 
@@ -26,7 +26,7 @@
 
 ### Specifically, to use SQL Server on Azure:
 
-* Set your credentials on /src/config/sql.js. Refer to [mssql](https://www.npmjs.com/package/mssql) package.
+* Set your credentials on /src/config/sql.js and export it. Refer to [mssql](https://www.npmjs.com/package/mssql#config) package.
 
 # TO-DOs
 * Implement logout functionality
