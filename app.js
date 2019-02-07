@@ -7,6 +7,7 @@ const sql = require('mssql'); // SQL package
 const bodyParser = require('body-parser'); // Parses body of HTTP requests
 const cookieParser = require('cookie-parser'); // Parses cookies
 const session = require('express-session'); // Sessions
+const methodOverride = require('method-override'); // Use PUT and DELETE in client
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -15,6 +16,7 @@ const configSQL = require('./src/config/sql');
 
 sql.connect(configSQL).catch(err => debug(err));
 
+app.use(methodOverride('_method')); // override with POST having ?_method=DELETE
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

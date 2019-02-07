@@ -3,7 +3,6 @@ const debug = require('debug')('app:mongo:authController');
 
 function authController() {
   function signUp(req, res) {
-    debug(req.body);
     // create user & redirect
     const { username, password } = req.body;
     const url = process.env.MONGO_URL || 'mongodb://localhost:27017';

@@ -10,8 +10,7 @@ function bookController(bookService) {
       // debug(result);
       const books = result.recordset;
 
-      // TODO: swap 3 with books.length
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < books.length; i++) {
         const book = books[i];
         book.details = await bookService.getBookById(book.bookId);
         debug(book.details.image_url);
@@ -22,7 +21,8 @@ function bookController(bookService) {
         {
           nav: req.app.locals.nav,
           title: 'Library',
-          books: books.slice(0, 3),
+          books,
+          loggedIn: !!req.user,
         },
       );
     }());
@@ -31,15 +31,16 @@ function bookController(bookService) {
     (async function query() {
       const { id } = req.params;
       const request = new sql.Request();
-      const { recordset } = await request.input('id', sql.Int, id)
-        .query('select * from books where id = @id');
-      req.book = recordset[0];
+      const { recordset } = await request.input('bookId', sql.Int, id)
+        .query('select * from books where bookId = @bookId');
+      const book = recordset[0];
+      book.details = await bookService.getBookById(book.bookId);
       res.render(
         'bookView',
         {
           nav: req.app.locals.nav,
           title: 'Library',
-          book: req.book,
+          book,
         },
       );
     }());

@@ -9,10 +9,10 @@ const authRouter = express.Router();
 function router() {
   const { signUp, signIn, profile } = authController();
 
-  authRouter.route('/signUp')
+  authRouter.route('/sign-up')
     .post(signUp);
 
-  authRouter.route('/signIn')
+  authRouter.route('/sign-in')
     .get(signIn)
     .post(passport.authenticate('local', {
       successRedirect: '/auth/profile',

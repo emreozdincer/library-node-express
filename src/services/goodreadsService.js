@@ -15,7 +15,7 @@ function goodreadsService() {
               debug(err);
             } else {
               // debug(result);
-              debug('Got API response.');
+              // debug('Got API response.');
               resolve(result.GoodreadsResponse.book);
             }
           });

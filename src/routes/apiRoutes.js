@@ -5,7 +5,7 @@ const apiController = require('../controllers/sql/apiController');
 const apiRouter = express.Router();
 
 function router() {
-  const { getBooks, postBook, deleteBookById,
+  const { getBooks, getBookById, postBook, deleteBookById,
     postExampleBooks, deleteExampleBooks,
     getUsers, middleware } = apiController();
 
@@ -16,6 +16,9 @@ function router() {
 
   apiRouter.route('/books')
     .post(postBook);
+
+  apiRouter.route('/book/:id')
+    .get(getBookById);
 
   apiRouter.route('/books/:id')
     .delete(deleteBookById);

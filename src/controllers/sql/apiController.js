@@ -26,7 +26,7 @@ function apiController() {
 
   function postBook(req, res) {
     const { hasAccess, title, author, bookId } = req.body;
-    if (hasAccess) {
+    if (req.user && hasAccess) {
       if (title && author && bookId) {
         (async function postBookSQL() {
           debug('Posting...');
@@ -38,6 +38,28 @@ function apiController() {
       } else {
         res.status(400).send({ status: 'Bad Request' });
       }
+    } else {
+      res.status(403).send({ status: 'Unauthorized' });
+    }
+  }
+
+  function getBookById(req, res) {
+    const { hasAccess } = req.body;
+    const { id } = req.params;
+
+    if (hasAccess) {
+      if (!id) {
+        res.status(400).send({ status: 'Bad Request' });
+      }
+
+      (async function getBookSQL() {
+        const request = new sql.Request();
+        const query = `SELECT FROM books WHERE bookId = '${id}'`;
+        // debug(query);
+        const response = await request.query(query);
+        res.send(response);
+      }());
+
     } else {
       res.status(403).send({ status: 'Unauthorized' });
     }
@@ -55,7 +77,7 @@ function apiController() {
       (async function deleteBookSQL() {
         const request = new sql.Request();
         const query = `DELETE FROM books WHERE bookId = '${id}'`;
-        debug(query);
+        // debug(query);
         const response = await request.query(query);
         res.send(response);
       }());
@@ -105,12 +127,13 @@ function apiController() {
 
   function middleware(req, res, next) {
     debug('In API Middleware');
+
     req.body.hasAccess = true;
     next();
   }
 
   return {
-    getBooks, postBook, deleteBookById,
+    getBooks, postBook, getBookById, deleteBookById,
     postExampleBooks, deleteExampleBooks,
     getUsers, middleware,
   };

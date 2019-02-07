@@ -12,11 +12,11 @@ function localStrategy() {
       (async function strategy() {
         // debug('Using local SQL strategy...');
         const request = new sql.Request();
-        const query = `SELECT * FROM users WHERE username='${username}'`;
+        const query = `SELECT * FROM users WHERE username='${username}' AND password = '${password}'`;
         const response = await request.query(query);
 
         const user = response.recordset[0];
-        if (user && user.password && user.password === password) {
+        if (user) {
           done(null, user);
         } else {
           done(null, false);

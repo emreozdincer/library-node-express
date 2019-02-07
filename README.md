@@ -9,6 +9,7 @@
 
 # Features
 * Routing, Middlewares, Debugging
+* API service under /api
 * Simple authentication & authorization
 * Structured (folder-by-type): config, controllers, routes, services, views
 * Uses Goodreads API to fetch information via Axios
@@ -31,7 +32,7 @@
 # TO-DOs
 * Implement logout functionality
 * Implement a feature about having a book read or not
-* Implement a feature about searching and adding a book to the list
+* Implement a feature about searching and ~~adding a book~~ to the list
 * Implement a section about Authors
 * Implement security measures for authentication process
   
