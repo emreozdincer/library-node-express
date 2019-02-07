@@ -40,10 +40,12 @@ app.locals.nav = [
 const bookRouter = require('./src/routes/bookRoutes')();
 const adminRouter = require('./src/routes/adminRoutes')();
 const authRouter = require('./src/routes/authRoutes')();
+const apiRoutes = require('./src/routes/apiRoutes')();
 
 app.use('/books', bookRouter);
 app.use('/admin', adminRouter);
 app.use('/auth', authRouter);
+app.use('/api', apiRoutes);
 app.get('/', (req, res) => {
   res.render(
     'index',

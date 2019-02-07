@@ -9,8 +9,11 @@ module.exports = {
             "allowForLoopAfterthoughts": true
         }],
         "no-unused-vars": ["error", {
-            "varsIgnorePattern": "debug" 
+            "varsIgnorePattern": "debug"
         }],
         "import/no-dynamic-require": "off",
+        "object-curly-newline": "off",
+        "object-property-newline": "off",
+        "padded-blocks": "off",
     },
 };
