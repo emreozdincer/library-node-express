@@ -7,7 +7,7 @@ const authRouter = express.Router();
 
 // TODO: Implement log out
 function router() {
-  const { signUp, signIn, profile } = authController();
+  const { signUp, signIn, logOut, profile } = authController();
 
   authRouter.route('/sign-up')
     .post(signUp);
@@ -18,6 +18,9 @@ function router() {
       successRedirect: '/auth/profile',
       failureRedirect: '/',
     }));
+
+  authRouter.route('/log-out')
+    .get(logOut);
 
   authRouter.route('/profile')
     .all((req, res, next) => {

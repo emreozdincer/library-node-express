@@ -28,6 +28,7 @@ function bookController(bookService) {
             nav: req.app.locals.nav,
             title: 'Library',
             books,
+            loggedIn: !!req.user,
           },
         );
       } catch (err) {
@@ -60,6 +61,7 @@ function bookController(bookService) {
             nav: req.app.locals.nav,
             title: 'Library',
             book,
+            loggedIn: !!req.user,
           },
         );
       } catch (err) {

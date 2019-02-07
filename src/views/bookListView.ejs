@@ -15,7 +15,7 @@
 	</head>
 	<body>
 
-<%- include('./nav', { nav }); %>
+<%- include('./nav', { nav, loggedIn }); %>
 
 <div id="masthead">  
   <div class="container">
@@ -87,13 +87,11 @@
             </div>
           </div>
         <%}%>
-          
         <hr>
+        <% if (!loggedIn) { %>
           <!--/stories-->
-          
           <a href="/auth/sign-in" class="btn btn-primary pull-right btnNext">Log in</a>
-        
-          
+        <% } %>
         </div>
       </div>
       <% if (loggedIn) { %>

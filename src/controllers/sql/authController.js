@@ -32,7 +32,13 @@ function authController() {
     res.render('signIn', {
       nav: req.app.locals.nav,
       title: 'Sign in',
+      loggedIn: !!req.user,
     });
+  }
+
+  function logOut(req, res) {
+    req.logout();
+    res.redirect('/');
   }
 
   function profile(req, res) {
@@ -41,10 +47,11 @@ function authController() {
       nav: req.app.locals.nav,
       title: 'Profile',
       user: { username: req.user.username },
+      loggedIn: !!req.user,
     });
   }
 
-  return { signUp, signIn, profile };
+  return { signUp, signIn, logOut, profile };
 }
 
 module.exports = authController;

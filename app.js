@@ -54,6 +54,7 @@ app.get('/', (req, res) => {
     {
       title: 'Library',
       nav: req.app.locals.nav,
+      loggedIn: !!req.user,
     },
   );
 });

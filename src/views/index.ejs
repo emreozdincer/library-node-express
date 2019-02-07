@@ -15,7 +15,7 @@
 	</head>
 	<body>
 
-<%- include('./nav', { nav }); %>
+<%- include('./nav', { nav, loggedIn }); %>
 
 <div id="masthead">  
   <div class="container">
@@ -61,15 +61,18 @@
           
           <!--/stories-->
           <div class="row">    
-            <br>
-            <div class="col-md-2 col-sm-3 text-center">
-              Sign Up! Or <a href="/auth/sign-in">Sign In</a>
-              <form name ="signUpForm" action="/auth/sign-up" method="post">
-                Username: <input name="username" id="username"/><br/>
-                Password: <input name="password" id="password"/><br/>
-                <input type="submit" value="Sign up"/>
-              </form>
-            </div>
+            <% if (!loggedIn) { %>
+              <div class="col-md-2 col-sm-3 text-center">
+                Sign Up! Or <a href="/auth/sign-in">Sign In</a>
+                <form name ="signUpForm" action="/auth/sign-up" method="post">
+                  Username: <input name="username" id="username"/><br/>
+                  Password: <input name="password" id="password"/><br/>
+                  <input type="submit" value="Sign up"/>
+                </form>
+              </div>
+            <% } else { %>
+              <p class="text-center"> Welcome to Library. </p>
+            <% } %>
           </div>
           <hr>
         </div>

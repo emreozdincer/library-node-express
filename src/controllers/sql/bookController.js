@@ -41,6 +41,7 @@ function bookController(bookService) {
           nav: req.app.locals.nav,
           title: 'Library',
           book,
+          loggedIn: !!req.user,
         },
       );
     }());
